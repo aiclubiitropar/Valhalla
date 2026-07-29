@@ -7,6 +7,7 @@ import ConversationFeed from "./components/ConversationFeed";
 import EventsPanel from "./components/EventsPanel";
 import DebugPanel from "./components/DebugPanel";
 import RosterManager from "./components/RosterManager";
+import { getBaseUrl } from "./utils/api";
 import "./App.css";
 
 function compactTabPosition(index) {
@@ -86,7 +87,7 @@ export default function App() {
   async function sendControl(path, body) {
     try {
       setControlError(null);
-      const response = await fetch(path, {
+      const response = await fetch(`${getBaseUrl()}${path}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: body ? JSON.stringify(body) : undefined,

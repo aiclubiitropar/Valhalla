@@ -18,7 +18,7 @@ export default function RosterManager({ open, onClose, simulationRunning, onErro
 
   const refresh = async () => {
     try {
-      const response = await fetch("/api/roster");
+      const response = await fetch(`${getBaseUrl()}/api/roster`);
       const data = await response.json();
       setRoster(data.agents || []);
       setSelected((previous) => previous || data.agents?.[0]?.id || "");
@@ -31,7 +31,7 @@ export default function RosterManager({ open, onClose, simulationRunning, onErro
     if (simulationRunning) { onError("Stop the simulation before editing the roster."); return; }
     setBusy(true); setNotice("");
     try {
-      const response = await fetch(path, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+      const response = await fetch(`${getBaseUrl()}${path}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Roster change failed.");
       setNotice(`${success} Checkpoint ${data.checkpoint_tick} is now the latest timeline state.`);
