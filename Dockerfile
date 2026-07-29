@@ -36,4 +36,4 @@ ENV PYTHONPATH=/app/backend
 EXPOSE 8000
 
 # Start the server with host binding to 0.0.0.0
-CMD ["python", "Odin.py", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "Odin.py"]

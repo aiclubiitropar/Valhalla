@@ -937,12 +937,12 @@ if __name__ == "__main__":
         help="Resume the latest checkpoint without clearing runtime data",
     )
     parser.add_argument(
-        "--port", type=int, default=8000,
-        help="Port to listen on (default: 8000)",
+        "--port", type=int, default=int(os.environ.get("PORT", 8000)),
+        help="Port to listen on (default: 8000 or $PORT)",
     )
     parser.add_argument(
-        "--host", type=str, default="127.0.0.1",
-        help="Host to listen on (default: 127.0.0.1)",
+        "--host", type=str, default="0.0.0.0",
+        help="Host to listen on (default: 0.0.0.0)",
     )
     args, _ = parser.parse_known_args()
 
