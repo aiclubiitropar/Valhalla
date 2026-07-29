@@ -16,6 +16,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Query
 from fastapi.responses import FileResponse, JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from typing import Any, Dict, List, Optional
 import re
@@ -150,6 +151,14 @@ async def _sim_lifespan(_app: FastAPI):
 
 
 app = FastAPI(title="Valhalla Agent Map", lifespan=_sim_lifespan)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def _print_agent_plans(engine):
